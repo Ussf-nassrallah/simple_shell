@@ -1,5 +1,40 @@
 #include "main.h"
 
+void execArguments(char *arguments)
+{
+	pid_t pid = fork();
+	// char *path = "/bin/ls";
+	char *arg[] = {arguments, "-ls", NULL};
+	char *env[] = {NULL};
+
+	if (pid == -1)
+	{
+		printf("\nFailed forking child..\n");
+		return;
+	}
+	else if (pid == 0)
+	{
+		char *args[100];
+		char *token = strtok(arguments, " \n");
+		int i = 0;
+		while (token != NULL) {
+			args[i++] = token;
+			token = strtok(NULL, " \n");
+		}
+		args[i] = NULL;
+		if (execve(arguments, arg, env) == -1)
+		{
+			perror("could not exe execve");
+		}
+		exit(0);
+	}
+	else
+	{
+		wait(NULL);
+		return;
+	}
+}
+
 /**
  * main - the starting point for program execution
  * @argc: number of arguments
@@ -30,7 +65,7 @@ int main(int argc, char *argv[])
 			return (false);
 		}
 		/* print results (output) */
-		printf("output : %s", command_line);
+		execArguments(command_line);
 		/* free up allocated memory */
 		free(command_line);
 		/* solution : free(): double free detected in tcache 2*/

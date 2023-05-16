@@ -8,5 +8,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 
 #endif
