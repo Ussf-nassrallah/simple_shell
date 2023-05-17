@@ -1,4 +1,4 @@
-#include "main.c"
+#include "main.h"
 
 /**
  * initialize_shell - Greeting shell during startup
