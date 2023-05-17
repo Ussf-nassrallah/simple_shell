@@ -5,7 +5,8 @@
  * @argc: number of arguments
  * @argv: array of arguments
  * Return: Always 0
-*/
+ */
+
 int main(int argc, char *argv[])
 {
 	/* Variables */
@@ -16,6 +17,8 @@ int main(int argc, char *argv[])
 	/* void argc: (arguments count) & argv: (array of arguments) */
 	(void)argc;
 	(void)argv;
+	/* init shell */
+	initialize_shell();
 	/* infinite loop start when the program run */
 	while (true)
 	{
@@ -30,7 +33,7 @@ int main(int argc, char *argv[])
 			return (false);
 		}
 		/* print results (output) */
-		printf("output : %s", command_line);
+		execArguments(command_line);
 		/* free up allocated memory */
 		free(command_line);
 		/* solution : free(): double free detected in tcache 2*/
