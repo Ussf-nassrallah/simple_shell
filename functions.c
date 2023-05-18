@@ -6,13 +6,13 @@
  */
 void initialize_shell(void)
 {
+	char *username = getenv("USER");
+
 	printf("\n\n\n\n******************************************");
 	printf("\n\n\n\t**** SHELL PROJECT ****");
 	printf("\n\n\t-Sometimes you have to break out of your shell to truly discover the world-\n\n");
 	printf("\tDEVELOPERS :\n\n\t- Youssef Nassrallah\n\t- Redwan Ben Yechou\n");
 	printf("\n\n\n\n******************************************");
-	char *username = getenv("USER");
-
 	printf("\n\n\nUSER is: @%s", username);
 	printf("\n");
 	sleep(1);
@@ -40,12 +40,21 @@ char **divider(char *input)
 	char *d = " \t\n";
 	char *token = strtok(input, d);
 	int index = 0;
+	int size = 100;
+
+	output = malloc(sizeof(char) * size);
 
 	while (token != NULL)
 	{
 		output[index++] = token;
 		check_com(token);
 		token = strtok(NULL, d);
+
+		if (index >= size)
+		{
+			size *= 2;
+			output = realloc(output, sizeof(char *) * size);
+		}
 	}
 
 	output[index] = NULL;
