@@ -1,5 +1,24 @@
 #include "main.h"
 
+/* ====== START: string_functions ====== */
+
+/**
+ * _strlen - function calculates the length of a given string
+ * @s: string
+ * Return: returns the length of string
+ */
+int _strlen(char *s)
+{
+	int index = 0;
+	while (s[index] != '\0')
+	{
+		index++;
+	}
+	return (index);
+}
+
+/* ====== END: string_functions ====== */
+
 /**
  * initialize_shell - Greeting shell during startup
  * Return: Nothing
@@ -16,17 +35,6 @@ void initialize_shell(void)
 	printf("\n\n\nUSER is: @%s", username);
 	printf("\n");
 	sleep(1);
-}
-
-/**
- * check_com - check if the file or directory specified by path exists
- * @com: ele will be checked
- * Return: Nothing
- */
-void check_com(char *com)
-{
-	if (access(com, F_OK) != 0)
-		printf("NOT FOUND: %s\n", com);
 }
 
 /**
@@ -47,7 +55,6 @@ char **divider(char *input)
 	while (token != NULL)
 	{
 		output[index++] = token;
-		check_com(token);
 		token = strtok(NULL, d);
 
 		if (index >= size)
@@ -62,25 +69,51 @@ char **divider(char *input)
 }
 
 /**
- * execArguments - function that execut arguments
- * @arguments: args will be exec
- * Return: Nothing
- */
-void execArguments(char *arguments)
+ * _get_env - search for env variables
+ * @env: env variable
+ * Return: return a pointer to the string containing the value
+*/
+char *_get_env(const char *env)
 {
-	pid_t pid = fork();
+	extern char **environ;
+	int index = 0;
+	char *slice;
 
-	if (pid == 0)
+	while (environ[index])
 	{
-		char **args = divider(arguments);
+		slice = strtok(environ[index], "=");
+		if (strcmp(env, slice) == 0)
+			return (strtok(NULL, "\n"));
+		index++;
+	}
 
-		if (execve(args[0], args, NULL) == -1)
-			perror("ERROR");
-		exit(0);
-	}
-	else
+	return (NULL);
+}
+
+/**
+ * _get_command - function that get command
+ * @command: command will be operated
+ * Return: pointer (output: command program path)
+ */
+char *_get_command(char *command)
+{
+	char *path = _get_env("PATH");
+	char *slice;
+	char *output;
+	struct stat st;
+
+	slice = strtok(path, ":");
+	while (slice)
 	{
-		wait(NULL);
-		return;
+		output = malloc(_strlen(slice) + _strlen(command) + 2);
+		strcpy(output, slice);
+		strcat(output, "/");
+		strcat(output, command);
+		if (stat(output, &st) == 0)
+			return (output);
+		free(output);
+		slice = strtok(NULL, ":");
 	}
+
+	return (NULL);
 }
