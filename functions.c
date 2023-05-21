@@ -1,24 +1,5 @@
 #include "main.h"
 
-/* ====== START: string_functions ====== */
-
-/**
- * _strlen - function calculates the length of a given string
- * @s: string
- * Return: returns the length of string
- */
-int _strlen(char *s)
-{
-	int index = 0;
-	while (s[index] != '\0')
-	{
-		index++;
-	}
-	return (index);
-}
-
-/* ====== END: string_functions ====== */
-
 /**
  * initialize_shell - Greeting shell during startup
  * Return: Nothing
@@ -82,7 +63,7 @@ char *_get_env(const char *env)
 	while (environ[index])
 	{
 		slice = strtok(environ[index], "=");
-		if (strcmp(env, slice) == 0)
+		if (_strcmp(env, slice) == 0)
 			return (strtok(NULL, "\n"));
 		index++;
 	}
@@ -106,9 +87,9 @@ char *_get_command(char *command)
 	while (slice)
 	{
 		output = malloc(_strlen(slice) + _strlen(command) + 2);
-		strcpy(output, slice);
-		strcat(output, "/");
-		strcat(output, command);
+		_strcpy(output, slice);
+		_strcat(output, "/");
+		_strcat(output, command);
 		if (stat(output, &st) == 0)
 			return (output);
 		free(output);

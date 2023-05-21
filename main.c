@@ -39,7 +39,7 @@ int main(int argc, char *argv[], char **env)
 		}
 		/* print results (output) */
 		arguments = divider(command_line);
-		if (strcmp(arguments[0], "exit") == 0)
+		if (_strcmp(arguments[0], "exit") == 0)
 			exit(0);
 		pid = fork();
 		if (pid == 0)
