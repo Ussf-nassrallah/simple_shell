@@ -10,6 +10,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-char* my_getline();
+char *my_getline(void);
 
 #endif
