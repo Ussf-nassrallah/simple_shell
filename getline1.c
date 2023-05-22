@@ -2,11 +2,16 @@
 
 #define BUFF_SIZE 1024
 
+/**
+ * my_getline - Read a line from standard input
+ *
+ * Return: A pointer to the line read, or NULL if there is no more input
+ */
 char *my_getline(void)
 {
 	static char buff[BUFF_SIZE];
-	static int buff_index = 0;
-	static int buff_size = 0;
+	static int buff_index;
+	static int buff_size;
 	char *line = NULL;
 	int line_size = 0;
 	int read_size;
@@ -21,9 +26,6 @@ char *my_getline(void)
 			if (line == NULL)
 				/* return NULL to indicate the end of input */
 				return (NULL);
-			else
-				/* return the line if there is any data before the end of input */
-				return (line);
 		}
 	}
 
