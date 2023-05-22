@@ -11,6 +11,5 @@
 #include <sys/types.h>
 
 char* my_getline();
-char *_getline();
 
 #endif

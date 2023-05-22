@@ -14,7 +14,7 @@ int main()
         {
                 printf("%s",prompt);
                 fflush(stdout);
-                if ((command = _getline1()) == NULL)
+                if ((command = my_getline()) == NULL)
                 {
                         printf("\n");
                         break;
