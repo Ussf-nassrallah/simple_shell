@@ -23,7 +23,8 @@ void _change_dir(char *command)
 		/* printing current working directory */
 		printf("%s\n", getcwd(str, 100));
 		/* change dir */
-		chdir(command);
+		if (chdir(command) != 0)
+			printf("cd: %s: No such file or directory\n", command);
 		/* printing current working directory */
 		printf("%s\n", getcwd(str, 100));
 	}
