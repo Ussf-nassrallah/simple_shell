@@ -15,6 +15,8 @@ void initialize_shell(void);
 char *_get_env(const char *env);
 char **divider(char *input);
 char *_get_command(char *command);
+void execArguments(char **arguments, char **env);
+void _change_dir(char *command);
 
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);

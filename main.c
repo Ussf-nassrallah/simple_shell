@@ -16,9 +16,6 @@ int main(int argc, char *argv[], char **env)
 	size_t len = 0;
 	ssize_t read;
 	char **arguments;
-	pid_t pid;
-	char *command;
-	int status;
 	/* void argc: (arguments count) & argv: (array of arguments) */
 	(void)argc;
 	(void)argv;
@@ -39,21 +36,19 @@ int main(int argc, char *argv[], char **env)
 		}
 		/* print results (output) */
 		arguments = divider(command_line);
+
 		if (_strcmp(arguments[0], "exit") == 0)
-			exit(0);
-		pid = fork();
-		if (pid == 0)
 		{
-			command = _get_command(arguments[0]);
-			if (command)
-				execve(command, arguments, env);
-			else
-				printf("command not found!\n");
 			exit(0);
+		}
+		else if (_strcmp(arguments[0], "cd") == 0)
+		{
+			_change_dir(arguments[1]);
+			printf("change dir success\n");
 		}
 		else
 		{
-			wait(&status);
+			execArguments(arguments, env);
 		}
 		/* free up allocated memory */
 		free(command_line);
