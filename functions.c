@@ -10,7 +10,6 @@ void initialize_shell(void)
 
 	printf("\n\n\n\n******************************************");
 	printf("\n\n\n\t**** SHELL PROJECT ****");
-	printf("\n\n\t-Sometimes you have to break out of your shell to truly discover the world-\n\n");
 	printf("\tDEVELOPERS :\n\n\t- Youssef Nassrallah\n\t- Redwan Ben Yechou\n");
 	printf("\n\n\n\n******************************************");
 	printf("\n\n\nUSER is: @%s", username);
@@ -53,10 +52,9 @@ char **divider(char *input)
  * _get_env - search for env variables
  * @env: env variable
  * Return: return a pointer to the string containing the value
-*/
+ */
 char *_get_env(const char *env)
 {
-	extern char **environ;
 	int index = 0;
 	char *slice;
 

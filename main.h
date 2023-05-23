@@ -11,6 +11,8 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
+extern char **environ;
+
 void initialize_shell(void);
 char *_get_env(const char *env);
 char **divider(char *input);
