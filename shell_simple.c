@@ -5,93 +5,44 @@
  *
  * Return: Always 0
  */
-int main(int argc, char *argv[])
+int main(void)
 {
 	char prompt[] = "#cisfun$ ";
 	char *command[100], *dlm = "\n";
-	char *input;
-	char *token;
+	char *argv[100], *token;
 	size_t size = 100;
 	int status, d, ret;
 	pid_t pid;
 
-	if (argc == 1)
+	while (1)
 	{
-		while (1)
+		write(1, prompt, 9);
+		d = getline(command, &size, stdin);
+		if (d == -1)
 		{
-			write(1, prompt, 9);
-			d = getline(command, &size, stdin);
-			if (d == -1)
-			{
-				perror("\n");
-				break;
-			}
-
-			token = strtok(*command, dlm);
-			argv[0] = token;
-			argv[1] = NULL;
-			pid = fork();
-
-			if (pid == -1)
-			{
-				perror("fork");
-				exit(EXIT_FAILURE);
-			}
-			else if (pid == 0)
-			{
-				ret = execve(argv[0], argv, NULL);
-				if (ret == -1)
-				{
-					perror("./shell");
-					exit(EXIT_FAILURE);
-				}
-			}
-			else
-				waitpid(pid, &status, 0);
+			perror("\n");
+			break;
 		}
-	}
-	else if (argc == 2)
-	{
-		FILE *fp;
-		input = NULL;
-		size = 0;
 
-		fp = fopen(argv[1], "r");
-		if (fp == NULL)
+		token = strtok(*command, dlm);
+		argv[0] = token;
+		argv[1] = NULL;
+		pid = fork();
+
+		if (pid == -1)
 		{
-			perror("File opening failed");
+			perror("fork");
 			exit(EXIT_FAILURE);
-		}
-
-		while (getline(&input, &size, fp) != -1)
+		} else if (pid == 0)
 		{
-			token = strtok(input, dlm);
-			argv[0] = token;
-			argv[1] = NULL;
-			pid = fork();
-
-			if (pid == -1)
+			ret = execve(argv[0], argv, NULL);
+			if (ret == -1)
 			{
-				perror("fork");
+				perror("./shell");
 				exit(EXIT_FAILURE);
 			}
-			else if (pid == 0)
-			{
-				ret = execve(argv[0], argv, NULL);
-				if (ret == -1)
-				{
-					perror("./shell");
-					exit(EXIT_FAILURE);
-				}
-			}
-			else
-				waitpid(pid, &status, 0);
-		}
-
-		free(input);
-		fclose(fp);
+		} else
+			waitpid(pid, &status, 0);
 	}
-
 	return (0);
 }
-
