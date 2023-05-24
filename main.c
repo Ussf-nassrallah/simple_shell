@@ -11,7 +11,7 @@
 int main(int argc, char *argv[], char **env)
 {
 	char *prompt = "($): ";
-	char *command_line;
+	char *command_line = NULL;
 	size_t len = 0;
 	ssize_t read;
 	char **arguments;
@@ -45,8 +45,6 @@ int main(int argc, char *argv[], char **env)
 		{
 			execArguments(arguments, env);
 		}
-		free(command_line);
-		command_line = NULL;
 	}
 
 	return (0);
