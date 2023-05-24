@@ -8,10 +8,10 @@
 int main(void)
 {
 	char prompt[] = "#cisfun$ ";
-	char *command[100];
-	char *argv[100];
+	char *command[100], *argv[100], *token;
 	size_t size = 100;
-	int status;
+	int status, argc;
+	pid_t pid;
 	
 	while (1)
 	{
@@ -22,8 +22,8 @@ int main(void)
 			exit (0);
 		}
 
-		int argc = 0;
-		char *token = strtok(*command, " \t\n");
+		argc = 0;
+		token = strtok(*command, " \t\n");
 		while (token != NULL)
 		{
 			if (strcmp(token,"exit") == 0)
@@ -32,7 +32,7 @@ int main(void)
 			token = strtok(NULL, " \t\n");
 		}
 		argv[argc] = NULL;
-		pid_t pid = fork();
+		pid = fork();
 		if (pid == -1)
 		{
 			perror("fork");
