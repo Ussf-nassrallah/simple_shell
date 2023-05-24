@@ -8,41 +8,47 @@
 int main(void)
 {
 	char prompt[] = "#cisfun$ ";
-	char *command[100], *dlm = "\n";
-	char *argv[100], *token;
+	char *command[100];
+	char *argv[100];
 	size_t size = 100;
-	int status, d, ret;
-	pid_t pid;
-
+	int status;
+	
 	while (1)
 	{
-		write(1, prompt, 9);
-		d = getline(command, &size, stdin);
-		if (d == -1)
+		printf("%s", prompt);
+		if (getline(command, &size, stdin) == -1)
 		{
-			perror("\n");
-			exit(0);
+			printf("\n");
+			exit (0);
 		}
 
-		token = strtok(*command, dlm);
-		argv[0] = token;
-		argv[1] = NULL;
-		pid = fork();
-
+		int argc = 0;
+		char *token = strtok(*command, " \t\n");
+		while (token != NULL)
+		{
+			if (strcmp(token,"exit") == 0)
+				exit (0);
+			argv[argc++] = token;
+			token = strtok(NULL, " \t\n");
+		}
+		argv[argc] = NULL;
+		pid_t pid = fork();
 		if (pid == -1)
 		{
 			perror("fork");
-			exit(EXIT_FAILURE);
-		} else if (pid == 0)
+			exit (EXIT_FAILURE);
+		}
+		else if (pid == 0)
 		{
-			ret = execve(argv[0], argv, NULL);
+			int ret = execvp(argv[0], argv);
 			if (ret == -1)
 			{
-				perror("./shell");
+				perror(argv[0]);
 				exit(EXIT_FAILURE);
 			}
-		} else
+		}
+		else
 			waitpid(pid, &status, 0);
 	}
-	return (0);
+	return 0;
 }
