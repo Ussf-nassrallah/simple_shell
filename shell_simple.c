@@ -4,23 +4,25 @@ int main ()
 {
         char prompt[] = "#cisfun$ ";
         char *command[100], *dlm = "\n";
-        char *argv[100];
+        char *argv[100], *token;
         size_t size = 100;
-        int status;
+        int status, d;
+	pid_t pid;
 
         while(1)
         {
                 printf("%s", prompt);
-                int d = getline(command, &size, stdin);
+                d = getline(command, &size, stdin);
                 if(d == -1)
                 {
                         printf("\n");
                         break;
                 }
-                char *token = strtok(*command, dlm);
+
+                token = strtok(*command, dlm);
                 argv[0] = token;
                 argv[1] = NULL;
-                pid_t pid = fork();
+                pid = fork();
                 if (pid == -1) {
                         perror("fork");
                         exit(EXIT_FAILURE);
