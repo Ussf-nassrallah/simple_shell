@@ -1,8 +1,27 @@
 #include "main.h"
 
-int main ()
+void trimSpaces(char *str) {
+    int start = 0;
+    int end = strlen(str) - 1;
+    int i;
+
+    while (isspace(str[start])) {
+        start++;
+    }
+
+    while (end >= start && isspace(str[end])) {
+        end--;
+    }
+
+    for (i = 0; i <= end - start; i++) {
+        str[i] = str[start + i];
+    }
+
+    str[i] = '\0';
+}
+
+int main(void)
 {
-        char prompt[] = "#cisfun$ ";
         char *command[100], *dlm = "\n";
         char *argv[100], *token;
         size_t size = 100;
@@ -11,15 +30,12 @@ int main ()
 
         while(1)
         {
-                printf("%s", prompt);
-		fflush(stdout);
                 d = getline(command, &size, stdin);
-
+		trimSpaces(*command);
 		if ((strlen(*command) - 2)  == 0)
 			exit(EXIT_SUCCESS);
                 if(d == -1)
                 {
-                        printf("\n");
                         exit (EXIT_SUCCESS);
                 }
 
