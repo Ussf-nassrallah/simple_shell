@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <sys/wait.h>
+#include <ctype.h>
 #include <sys/types.h>
 
 char *my_getline(void);
