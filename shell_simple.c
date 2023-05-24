@@ -21,7 +21,7 @@ int main(void)
 		if (d == -1)
 		{
 			perror("\n");
-			exit(EXIT_SUCCESS);
+			exit(0);
 		}
 
 		token = strtok(*command, dlm);
