@@ -22,7 +22,7 @@ int main(int argc, char *argv[], char **env)
 
 	while (true)
 	{
-		_puts(prompt);
+		write(1, prompt, _strlen(prompt));
 		read = getline(&command_line, &len, stdin);
 
 		if (read == -1)

@@ -1,23 +1,6 @@
 #include "main.h"
 
 /**
- * initialize_shell - Greeting shell during startup
- * Return: Nothing
- */
-void initialize_shell(void)
-{
-	char *username = getenv("USER");
-
-	printf("\n\n\n\n******************************************");
-	printf("\n\n\n\t**** SHELL PROJECT ****");
-	printf("\tDEVELOPERS :\n\n\t- Youssef Nassrallah\n\t- Redwan Ben Yechou\n");
-	printf("\n\n\n\n******************************************");
-	printf("\n\n\nUSER is: @%s", username);
-	printf("\n");
-	sleep(1);
-}
-
-/**
  * divider - function that split string to slices
  * @input: string will be split
  * Return: array of slices
@@ -30,18 +13,13 @@ char **divider(char *input)
 	int index = 0;
 	int size = 100;
 
-	output = malloc(sizeof(char) * size);
+	output = malloc(sizeof(char *) * size);
 
 	while (token != NULL)
 	{
-		output[index++] = token;
+		output[index] = token;
 		token = strtok(NULL, d);
-
-		if (index >= size)
-		{
-			size *= 2;
-			output = realloc(output, sizeof(char *) * size);
-		}
+		index++;
 	}
 
 	output[index] = NULL;

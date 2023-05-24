@@ -14,7 +14,6 @@ char *my_getline(void)
 	static int buff_size;
 	char *line = NULL;
 	int line_size = 0;
-	int read_size;
 
 	if (buff_index >= buff_size)
 	{
