@@ -2,7 +2,7 @@
 
 int main ()
 {
-        char prompt[] = "#cisfun$ ";
+        char prompt[] = "$ ";
         char *command[100], *dlm = "\n";
         char *argv[100], *token;
         size_t size = 100;
@@ -11,7 +11,7 @@ int main ()
 
         while(1)
         {
-                printf("%s", prompt);
+		write(1, prompt, 2);
                 d = getline(command, &size, stdin);
                 if(d == -1)
                 {
