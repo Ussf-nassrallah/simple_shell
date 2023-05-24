@@ -16,8 +16,10 @@ int main(void)
 	while (1)
 	{
 		printf("%s", prompt);
+		fflush(stdout);
 		if (getline(command, &size, stdin) == -1)
 		{
+			free(command);
 			printf("\n");
 			exit (EXIT_SUCCESS);
 		}
