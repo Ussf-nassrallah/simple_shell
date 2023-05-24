@@ -18,16 +18,16 @@ int main(int argc, char *argv[], char **env)
 	(void)argc;
 	(void)argv;
 
-	initialize_shell();
+	/*initialize_shell();*/
 
 	while (true)
 	{
-		printf("%s", prompt);
+		_puts(prompt);
 		read = getline(&command_line, &len, stdin);
 
 		if (read == -1)
 		{
-			printf("exit\n");
+			_puts("exit");
 			return (false);
 		}
 		arguments = divider(command_line);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[], char **env)
 		else if (_strcmp(arguments[0], "cd") == 0)
 		{
 			_change_dir(arguments[1]);
-			printf("change dir success\n");
+			_puts("change dir success");
 		}
 		else
 		{
