@@ -4,35 +4,29 @@
  * main - the starting point for program execution
  * @argc: number of arguments
  * @argv: array of arguments
+ * @env: environment variables
  * Return: Always 0
  */
 
 int main(int argc, char *argv[])
 {
 	char *prompt = "#cisfun$ ";
-	char *command_line = NULL;
+	char *command_line;
 	size_t len = 0;
-	int read;
+	size_t read;
 	char *slice;
 	int status;
 	int index = 0;
-	char **output;
+	int **output;
 	pid_t pid;
 	(void) argv;
-	(void) argc;
 
-	while (true)
+	while (1)
 	{
 		write(1, prompt, _strlen(prompt));
 		read = getline(&command_line, &len, stdin);
 		output = malloc(sizeof(char *) * 1024);
 		slice = strtok(command_line, " /t/n");
-
-		if (read == -1)
-		{
-			_puts("exit");
-			return (false);
-		}
 
 		while (slice)
 		{
