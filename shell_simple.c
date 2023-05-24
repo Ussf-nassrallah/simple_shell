@@ -19,7 +19,7 @@ int main(void)
 		if (getline(command, &size, stdin) == -1)
 		{
 			printf("\n");
-			exit (0);
+			exit (EXIT_SUCCESS);
 		}
 
 		argc = 0;
@@ -27,7 +27,7 @@ int main(void)
 		while (token != NULL)
 		{
 			if (strcmp(token,"exit") == 0)
-				exit (0);
+				exit (EXIT_SUCCESS);
 			argv[argc++] = token;
 			token = strtok(NULL, " \t\n");
 		}
@@ -36,7 +36,7 @@ int main(void)
 		if (pid == -1)
 		{
 			perror("fork");
-			exit (EXIT_FAILURE);
+			exit (EXIT_SUCCESS);
 		}
 		else if (pid == 0)
 		{
@@ -44,7 +44,7 @@ int main(void)
 			if (ret == -1)
 			{
 				perror(argv[0]);
-				exit(EXIT_FAILURE);
+				exit(EXIT_SUCCESS);
 			}
 		}
 		else
