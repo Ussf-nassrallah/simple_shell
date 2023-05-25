@@ -18,13 +18,24 @@ void execArguments(char **arguments, char **env)
         if (ret == -1)
         {
             perror("./shell");
-            exit(2);
+            exit(EXIT_FAILURE);
         }
         exit(EXIT_SUCCESS);
     }
     else if (pid > 0)
     {
         waitpid(pid, &status, 0);
+
+        if (WIFEXITED(status))
+        {
+            int exit_status = WEXITSTATUS(status);
+            // Use exit_status to handle the exit status of the child process
+            // For example, you can print it or use it for further processing
+            if (exit_status != 0)
+            {
+                // Handle non-zero exit status
+            }
+        }
     }
 
     free(arguments);
