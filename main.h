@@ -28,5 +28,6 @@ void execArguments(char **arguments, char **env);
 void _change_dir(char *command);
 char *my_getline(void);
 void trimSpaces(char *str);
+int containsForwardSlash(const char* str);
 
 #endif
