@@ -91,3 +91,23 @@ int _strcmp(const char *s1, char *s2)
 	}
 	return (0);
 }
+
+void trimSpaces(char *str) {
+    int start = 0;
+    int end = strlen(str) - 1;
+    int i;
+
+    while (isspace(str[start])) {
+        start++;
+    }
+
+    while (end >= start && isspace(str[end])) {
+        end--;
+    }
+
+    for (i = 0; i <= end - start; i++) {
+        str[i] = str[start + i];
+    }
+
+    str[i] = '\0';
+}
