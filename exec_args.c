@@ -9,7 +9,6 @@
 void execArguments(char **arguments, char **env)
 {
 	pid_t pid;
-	char *command;
 	int status;
 
 	pid = fork();
