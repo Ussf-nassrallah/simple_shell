@@ -7,7 +7,6 @@
  * @env: environment variables
  * Return: Always 0
  */
-
 int main(int argc, char *argv[], char **env)
 {
     char *command_line = NULL;
@@ -16,9 +15,7 @@ int main(int argc, char *argv[], char **env)
     char **arguments;
     (void)argc;
     (void)argv;
-
-    /*initialize_shell();*/
-
+    
     while (true)
     {
         read = getline(&command_line, &len, stdin);
