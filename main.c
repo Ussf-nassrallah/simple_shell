@@ -22,9 +22,7 @@ int main(int argc, char *argv[], char **env)
         while (1)
         {
                 read = getline(&command_line, &len, stdin);
-                printf("strlen 1 : %d",_strlen(command_line));
                 trimSpaces(command_line);
-                printf("strlen 2 : %d",_strlen(command_line));
 
                 if(_strlen(command_line) == 0 || _strlen(command_line) == 1){
                         exit(EXIT_SUCCESS);
