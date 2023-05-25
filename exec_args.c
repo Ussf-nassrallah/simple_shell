@@ -9,12 +9,22 @@
 void execArguments(char **arguments, char **env)
 {
     pid_t pid;
-    int status;
+    int status,ret;
+    char *command;
 
     pid = fork();
     if (pid == 0)
     {
-        int ret = execve(arguments[0], arguments, env);
+        if(containsForwardSlash(arguments[0]) == 0)
+        {
+                command = _get_command(arguments[0]);
+                ret = execve(command, arguments, env);
+        }
+        else
+        {
+                ret = execve(arguments[0], arguments, env);
+        }
+
         if (ret == -1)
         {
             perror("./shell");
