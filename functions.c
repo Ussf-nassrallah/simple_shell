@@ -67,28 +67,23 @@ char *_get_env(const char *env)
  */
 char *_get_command(char *command)
 {
-    char *path = _get_env("PATH");
-    char *slice;
-    char *output;
-    struct stat st;
+        char *path = _get_env("PATH");
+        char *slice;
+        char *output;
+        struct stat st;
 
-    slice = strtok(path, ":");
-    while (slice)
-    {
-        output = malloc(_strlen(slice) + _strlen(command) + 2);
-        _strcpy(output, slice);
-        _strcat(output, "/");
-        _strcat(output, command);
-        if (stat(output, &st) == 0)
+        slice = strtok(path, ":");
+        while (slice)
         {
-            free(path);
-            return output;
+                output = malloc(_strlen(slice) + _strlen(command) + 2);
+                _strcpy(output, slice);
+                _strcat(output, "/");
+                _strcat(output, command);
+                if (stat(output, &st) == 0)
+                        return (output);
+                free(output);
+                slice = strtok(NULL, ":");
         }
-        free(output);
-        slice = strtok(NULL, ":");
-    }
 
-    free(path); 
-
-    return NULL;
+        return (NULL);
 }
