@@ -18,7 +18,7 @@ void execArguments(char **arguments, char **env)
         if (ret == -1)
         {
             perror("./shell");
-            exit(EXIT_SUCCESS);
+            exit(2);
         }
         exit(EXIT_SUCCESS);
     }
