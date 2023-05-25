@@ -8,22 +8,24 @@
  */
 void execArguments(char **arguments, char **env)
 {
-        pid_t pid;
-        int status;
+    pid_t pid;
+    int status;
 
-        pid = fork();
-        if (pid == 0)
+    pid = fork();
+    if (pid == 0)
+    {
+        int ret = execve(arguments[0], arguments, env);
+        if (ret == -1)
         {
-                int ret = execve(arguments[0], arguments, env);
-                if(ret == -1)
-                {
-                        perror("./shell");
-                        exit(EXIT_SUCCESS);
-                }
-                exit(EXIT_SUCCESS);
+            perror("./shell");
+            exit(EXIT_SUCCESS);
         }
-        else
-        {
-                waitpid(pid, &status, 0);
-        }
+        exit(EXIT_SUCCESS);
+    }
+    else if (pid > 0)
+    {
+        waitpid(pid, &status, 0);
+    }
+
+    free(arguments);
 }
