@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <sys/types.h>
+#include <ctype.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 
@@ -26,5 +27,6 @@ char *_get_command(char *command);
 void execArguments(char **arguments, char **env);
 void _change_dir(char *command);
 char *my_getline(void);
+void trimSpaces(char *str);
 
 #endif
