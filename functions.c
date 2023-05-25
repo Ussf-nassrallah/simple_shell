@@ -7,24 +7,27 @@
  */
 char **divider(char *input)
 {
-	char **output;
-	char *d = " \t\n";
-	char *token = strtok(input, d);
-	int index = 0;
-	int size = 100;
+    char **output;
+    const char *d = " \t\n";
+    char *token = strtok(input, d);
+    int index = 0;
+    int size = 100;
 
-	output = malloc(sizeof(char *) * size);
+    output = malloc(sizeof(char *) * size);
 
-	while (token != NULL)
-	{
-		output[index] = token;
-		token = strtok(NULL, d);
-		index++;
-	}
+    while (token != NULL)
+    {
+        output[index] = token;
+        token = strtok(NULL, d);
+        index++;
+    }
+    output[index] = NULL;
 
-	output[index] = NULL;
-	return (output);
+    output = realloc(output, sizeof(char *) * (index + 1));
+
+    return output;
 }
+
 
 /**
  * _get_env - search for env variables
@@ -33,19 +36,29 @@ char **divider(char *input)
  */
 char *_get_env(const char *env)
 {
-	int index = 0;
-	char *slice;
+    int index = 0;
+    char *slice;
+    char *value = NULL;
 
-	while (environ[index])
-	{
-		slice = strtok(environ[index], "=");
-		if (_strcmp(env, slice) == 0)
-			return (strtok(NULL, "\n"));
-		index++;
-	}
+    while (environ[index])
+    {
+        slice = strtok(environ[index], "=");
+        if (_strcmp(env, slice) == 0)
+        {
+            value = strtok(NULL, "\n");
+            break;
+        }
+        index++;
+    }
 
-	return (NULL);
+    while (slice != NULL)
+    {
+        slice = strtok(NULL, "=");
+    }
+
+    return value;
 }
+
 
 /**
  * _get_command - function that get command
@@ -54,23 +67,28 @@ char *_get_env(const char *env)
  */
 char *_get_command(char *command)
 {
-	char *path = _get_env("PATH");
-	char *slice;
-	char *output;
-	struct stat st;
+    char *path = _get_env("PATH");
+    char *slice;
+    char *output;
+    struct stat st;
 
-	slice = strtok(path, ":");
-	while (slice)
-	{
-		output = malloc(_strlen(slice) + _strlen(command) + 2);
-		_strcpy(output, slice);
-		_strcat(output, "/");
-		_strcat(output, command);
-		if (stat(output, &st) == 0)
-			return (output);
-		free(output);
-		slice = strtok(NULL, ":");
-	}
+    slice = strtok(path, ":");
+    while (slice)
+    {
+        output = malloc(_strlen(slice) + _strlen(command) + 2);
+        _strcpy(output, slice);
+        _strcat(output, "/");
+        _strcat(output, command);
+        if (stat(output, &st) == 0)
+        {
+            free(path);
+            return output;
+        }
+        free(output);
+        slice = strtok(NULL, ":");
+    }
 
-	return (NULL);
+    free(path); 
+
+    return NULL;
 }
