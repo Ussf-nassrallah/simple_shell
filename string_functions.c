@@ -111,3 +111,14 @@ void trimSpaces(char *str) {
 
     str[i] = '\0';
 }
+
+int containsForwardSlash(const char* str) 
+{
+        int i;
+        for (i = 0; str[i] != '\0'; i++) {
+                if (str[i] == '/') {
+                return 1;
+                }
+        }
+        return 0;
+}
