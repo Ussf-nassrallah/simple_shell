@@ -15,14 +15,14 @@ void execArguments(char **arguments, char **env)
     pid = fork();
     if (pid == 0)
     {
-        if(containsForwardSlash(arguments[0]) == 0)
+        if(containsForwardSlash(arguments[0]) == 0 && strstr(arguments[0],"hbtn") == NULL)
         {
                 command = _get_command(arguments[0]);
                 ret = execve(command, arguments, env);
         }
         else
         {
-                ret = execve(arguments[0], arguments, env);
+                ret = execve(arguments[0], arguments, env); 
         }
 
         if (ret == -1)
