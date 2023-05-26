@@ -29,5 +29,6 @@ void _change_dir(char *command);
 char *my_getline(void);
 void trimSpaces(char *str);
 int containsForwardSlash(const char* str);
+char *_stok(char *s, char *d);
 
 #endif
