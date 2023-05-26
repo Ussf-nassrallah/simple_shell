@@ -9,7 +9,7 @@ char **divider(char *input)
 {
     char **output;
     const char *d = " \t\n";
-    char *token = strtok(input, d);
+    char *token = _stok(input, d);
     int index = 0;
     int size = 100;
 
@@ -18,7 +18,7 @@ char **divider(char *input)
     while (token != NULL)
     {
         output[index] = token;
-        token = strtok(NULL, d);
+        token = _stok(NULL, d);
         index++;
     }
     output[index] = NULL;
@@ -42,10 +42,10 @@ char *_get_env(const char *env)
 
     while (environ[index])
     {
-        slice = strtok(environ[index], "=");
+        slice = _stok(environ[index], "=");
         if (_strcmp(env, slice) == 0)
         {
-            value = strtok(NULL, "\n");
+            value = _stok(NULL, "\n");
             break;
         }
         index++;
@@ -53,7 +53,7 @@ char *_get_env(const char *env)
 
     while (slice != NULL)
     {
-        slice = strtok(NULL, "=");
+        slice = _stok(NULL, "=");
     }
 
     return value;
@@ -72,7 +72,7 @@ char *_get_command(char *command)
         char *output;
         struct stat st;
 
-        slice = strtok(path, ":");
+        slice = _stok(path, ":");
         while (slice)
         {
                 output = malloc(_strlen(slice) + _strlen(command) + 2);
@@ -82,7 +82,7 @@ char *_get_command(char *command)
                 if (stat(output, &st) == 0)
                         return (output);
                 free(output);
-                slice = strtok(NULL, ":");
+                slice = _stok(NULL, ":");
         }
 
         return (NULL);
