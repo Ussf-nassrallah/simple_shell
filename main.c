@@ -4,10 +4,11 @@ void _run(char *command_line, ssize_t read, char **env);
 
 /**
  * _run - run function
- * @com: command_line
+ * @command_line: user input
+ * @read: read line
+ * @env: env variables
  * Return: Nothing
  */
-
 void _run(char *command_line, ssize_t read, char **env)
 {
 	char **arguments;
