@@ -89,6 +89,26 @@ char *_get_command(char *command)
 }
 
 /**
+ * check_d - check if delim contain main character
+ * @c: character will be operated
+ * @d: separator
+ * Return: 0 | 1
+ */
+int check_d(char c, char *d)
+{
+	int idx = 0;
+
+	while (d[idx])
+	{
+		if (c == d[idx])
+			return (1);
+		idx++;
+	}
+
+	return (0);
+}
+
+/**
  * _stokhelper - go to the next slice
  * @s: string will be operated
  * @d: separator
