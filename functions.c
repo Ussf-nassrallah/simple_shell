@@ -8,7 +8,7 @@
 char **divider(char *input)
 {
     char **output;
-    const char *d = " \t\n";
+    char *d = " \t\n";
     char *token = _stok(input, d);
     int index = 0;
     int size = 100;
