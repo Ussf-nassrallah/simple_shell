@@ -87,3 +87,37 @@ char *_get_command(char *command)
 
         return (NULL);
 }
+
+/**
+ * _stokhelper - go to the next slice
+ * @s: string will be operated
+ * @d: separator
+ * Return: pointer or null
+ */
+char *_stokhelper(char *s, char *d)
+{
+	int index = 0;
+
+	while (s[index])
+	{
+		if (check_d(s[index], d))
+		{
+			s[index] = '\0';
+
+			while (check_d(s[index + 1], d))
+			{
+				s[index + 1] = '\0';
+				index++;
+			}
+
+			if (s[index + 1] != '\0')
+				return (&s[index + 1]);
+
+			return (NULL);
+		}
+
+		index++;
+	}
+
+	return (NULL);
+}

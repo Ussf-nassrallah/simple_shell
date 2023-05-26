@@ -22,7 +22,7 @@ char *_stok(char *s, char *d)
 	while (*s && *s == ' ')
 		s++;
 
-	following = helper(s, d);
+	following = _stokhelper(s, d);
 
 	return (s);
 }
