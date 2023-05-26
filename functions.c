@@ -7,25 +7,25 @@
  */
 char **divider(char *input)
 {
-    char **output;
-    char *d = " \t\n";
-    char *token = _stok(input, d);
-    int index = 0;
-    int size = 100;
+	char **output;
+	char *d = " \t\n";
+	char *token = _stok(input, d);
+	int index = 0;
+	int size = 100;
 
-    output = malloc(sizeof(char *) * size);
+	output = malloc(sizeof(char *) * size);
 
-    while (token != NULL)
-    {
-        output[index] = token;
-        token = _stok(NULL, d);
-        index++;
-    }
-    output[index] = NULL;
+	while (token != NULL)
+	{
+		output[index] = token;
+		token = _stok(NULL, d);
+		index++;
+	}
+	output[index] = NULL;
 
-    output = realloc(output, sizeof(char *) * (index + 1));
+	output = realloc(output, sizeof(char *) * (index + 1));
 
-    return output;
+	return (output);
 }
 
 
@@ -36,27 +36,27 @@ char **divider(char *input)
  */
 char *_get_env(const char *env)
 {
-    int index = 0;
-    char *slice;
-    char *value = NULL;
+	int index = 0;
+	char *slice;
+	char *value = NULL;
 
-    while (environ[index])
-    {
-        slice = _stok(environ[index], "=");
-        if (_strcmp(env, slice) == 0)
-        {
-            value = _stok(NULL, "\n");
-            break;
-        }
-        index++;
-    }
+	while (environ[index])
+	{
+		slice = _stok(environ[index], "=");
+		if (_strcmp(env, slice) == 0)
+		{
+			value = _stok(NULL, "\n");
+			break;
+		}
+		index++;
+	}
 
-    while (slice != NULL)
-    {
-        slice = _stok(NULL, "=");
-    }
+	while (slice != NULL)
+	{
+		slice = _stok(NULL, "=");
+	}
 
-    return value;
+	return (value);
 }
 
 
@@ -67,25 +67,25 @@ char *_get_env(const char *env)
  */
 char *_get_command(char *command)
 {
-        char *path = _get_env("PATH");
-        char *slice;
-        char *output;
-        struct stat st;
+	char *path = _get_env("PATH");
+	char *slice;
+	char *output;
+	struct stat st;
 
-        slice = _stok(path, ":");
-        while (slice)
-        {
-                output = malloc(_strlen(slice) + _strlen(command) + 2);
-                _strcpy(output, slice);
-                _strcat(output, "/");
-                _strcat(output, command);
-                if (stat(output, &st) == 0)
-                        return (output);
-                free(output);
-                slice = _stok(NULL, ":");
-        }
+	slice = _stok(path, ":");
+	while (slice)
+	{
+		output = malloc(_strlen(slice) + _strlen(command) + 2);
+		_strcpy(output, slice);
+		_strcat(output, "/");
+		_strcat(output, command);
+		if (stat(output, &st) == 0)
+			return (output);
+		free(output);
+		slice = _stok(NULL, ":");
+	}
 
-        return (NULL);
+	return (NULL);
 }
 
 /**

@@ -8,43 +8,43 @@
  */
 void execArguments(char **arguments, char **env)
 {
-    pid_t pid;
-    int status,ret;
-    char *command;
+	pid_t pid;
+	int status, ret;
+	char *command;
 
-    pid = fork();
-    if (pid == 0)
-    {
-        if(containsForwardSlash(arguments[0]) == 0 && strstr(arguments[0],"hbtn") == NULL)
-        {
-                command = _get_command(arguments[0]);
-                ret = execve(command, arguments, env);
-        }
-        else
-        {
-                ret = execve(arguments[0], arguments, env); 
-        }
+	pid = fork();
+	if (pid == 0)
+	{
+		if (cFWS(arguments[0]) == 0 && strstr(arguments[0], "hbtn") == NULL)
+		{
+			command = _get_command(arguments[0]);
+			ret = execve(command, arguments, env);
+		}
+		else
+		{
+			ret = execve(arguments[0], arguments, env);
+		}
 
-        if (ret == -1)
-        {
-            perror("./shell");
-            exit(EXIT_FAILURE);
-        }
-        exit(EXIT_SUCCESS);
-    }
-    else if (pid > 0)
-    {
-        waitpid(pid, &status, 0);
+		if (ret == -1)
+		{
+			perror("./shell");
+			exit(EXIT_FAILURE);
+		}
+		exit(EXIT_SUCCESS);
+	}
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
 
-        if (WIFEXITED(status))
-        {
-            int exit_status = WEXITSTATUS(status);
-            if (exit_status != 0)
-            {
-                exit(2);
-            }
-        }
-    }
+		if (WIFEXITED(status))
+		{
+			int exit_status = WEXITSTATUS(status);
 
-    free(arguments);
+			if (exit_status != 0)
+			{
+				exit(2);
+			}
+		}
+	}
+	free(arguments);
 }

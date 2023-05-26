@@ -7,13 +7,13 @@
  */
 int _strlen(char *s)
 {
-        int index = 0;
+	int index = 0;
 
-        while (s[index] != '\0')
-        {
-                index++;
-        }
-        return (index);
+	while (s[index] != '\0')
+	{
+		index++;
+	}
+	return (index);
 }
 
 /**
@@ -24,19 +24,19 @@ int _strlen(char *s)
  */
 char *_strcpy(char *dest, char *src)
 {
-        int l = 0;
-        int x = 0;
+	int l = 0;
+	int x = 0;
 
-        while (*(src + l) != '\0')
-        {
-                l++;
-        }
-        for ( ; x < l ; x++)
-        {
-                dest[x] = src[x];
-        }
-        dest[l] = '\0';
-        return (dest);
+	while (*(src + l) != '\0')
+	{
+		l++;
+	}
+	for ( ; x < l ; x++)
+	{
+		dest[x] = src[x];
+	}
+	dest[l] = '\0';
+	return (dest);
 }
 
 /**
@@ -48,25 +48,25 @@ char *_strcpy(char *dest, char *src)
 
 char *_strcat(char *dest, char *src)
 {
-        int i, j;
+	int i, j;
 
-        i = 0;
+	i = 0;
 
-        while (dest[i] != '\0')
-        {
-                i++;
-        };
+	while (dest[i] != '\0')
+	{
+		i++;
+	};
 
-        j = 0;
+	j = 0;
 
-        while (src[j] != '\0')
-        {
-                dest[i] = src[j];
-                i++;
-                j++;
-        };
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	};
 
-        return (dest);
+	return (dest);
 }
 
 /**
@@ -78,47 +78,16 @@ char *_strcat(char *dest, char *src)
  */
 int _strcmp(const char *s1, char *s2)
 {
-        int i;
+	int i;
 
-        i = 0;
-        while (s1[i] != '\0' && s2[i] != '\0')
-        {
-                if (s1[i] != s2[i])
-                {
-                        return (s1[i] - s2[i]);
-                }
-                i++;
-        }
-        return (0);
-}
-
-void trimSpaces(char *str) {
-    int start = 0;
-    int end = strlen(str) - 1;
-    int i;
-
-    while (isspace(str[start])) {
-        start++;
-    }
-
-    while (end >= start && isspace(str[end])) {
-        end--;
-    }
-
-    for (i = 0; i <= end - start; i++) {
-        str[i] = str[start + i];
-    }
-
-    str[i] = '\0';
-}
-
-int containsForwardSlash(const char* str) 
-{
-        int i;
-        for (i = 0; str[i] != '\0'; i++) {
-                if (str[i] == '/') {
-                return 1;
-                }
-        }
-        return 0;
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+		{
+			return (s1[i] - s2[i]);
+		}
+		i++;
+	}
+	return (0);
 }
