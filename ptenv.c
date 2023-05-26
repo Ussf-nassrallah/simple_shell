@@ -12,7 +12,6 @@ void _ptenv(char **argv __attribute__ ((unused)))
 	for (; environ[index]; index++)
 	{
 		_puts(environ[index]);
-		_puts("\n");
 	}
 
 }
