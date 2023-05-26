@@ -21,6 +21,7 @@ char *_strcpy(char *dest, char *src);
 void _puts(char *str);
 int _putchar(char);
 
+void _ptenv(char **argv __attribute__ ((unused)));
 char *_get_env(const char *env);
 char **divider(char *input);
 char *_get_command(char *command);

@@ -46,6 +46,11 @@ int main(int argc, char *argv[], char **env)
             _change_dir(arguments[1]);
             free(arguments);
         }
+	else if (_strcmp(arguments[0], "env") == 0)
+	{
+		_ptenv(arguments);
+		free(arguments);
+	}
         else
         {
             execArguments(arguments, env);
